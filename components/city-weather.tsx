@@ -15,7 +15,7 @@ export class CityWeather extends Component<CityWeatherProps, CityWeatherState> {
   public constructor(props) {
     super(props);
     this.state = {
-      weatherResult: null
+      weatherResult: null,
     };
   }
 
@@ -32,6 +32,10 @@ export class CityWeather extends Component<CityWeatherProps, CityWeatherState> {
     const { city } = this.props;
     const { weatherResult } = this.state;
 
+    if (!weatherResult) {
+      return <div>Loading...</div>;
+    }
+console.log(weatherResult)
     return (
       <div>
         <h1>{city}</h1>

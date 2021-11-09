@@ -13,7 +13,7 @@ After you get your API, add that as API_KEY in city-weather.tsx
 Steps to reproduce:
 
 1. Type a valid US city in the "Weather Search" box
-2. Press {enter}
+1. Press {enter}
 
 Expected results
 User should see the current weather results for that city
@@ -28,6 +28,15 @@ App crashes
 2. Talk about your changes
    - Write a short description about what was the underlying cause of the bug and how you fixed it
 
+   The following error message was received when putting in a valid city. Uncaught TypeError: can't access property "main", weatherResult is null. The above error occurred in the          `<CityWeather>` component.
+   
+   The fix was to add an if statement to check if weather data is null
+
+      `if (!weatherResult) return <div>Loading...</div>`
+   
+   This was done to keep the app from sending weatherData that is null to the CityWeather component and crashing the app.
+
+   I like this solution because it provides the user with feedback that the app is working and prevents the crash. I would also implement error handling to the API call to make sure that the app doesn't crash when the user enters an invalid city.
 ## Deliverable 2:
 
 1. Create a city-weather-refactor.tsx file, in which you refactor the city-weather component to use react hooks rather than React.Component. Incorporate the following:
