@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
+import Image from 'next/image'
+
 // todo: refactor the city-weather component to use function component & react hooks
 
-import { useEffect, useState } from "react";
 
 // to get api key: https://openweathermap.org/appid
 const API_KEY = "b233fc3510574b2cec6129d5d30e9ee2";
@@ -37,10 +39,14 @@ export const CityWeather = ({city}:CityWeatherProps) => {
     return (
         <div>
             <h1>{weatherResult.name}</h1>
-            <div>{weatherResult?.weather[0].icon}</div>
-            <div>Descripiton: {weatherResult?.weather[0].description}</div>
+            <Image
+                src={`http://openweathermap.org/img/wn/${weatherResult?.weather[0].icon}@2x.png`}
+                width={100}
+                height={100}
+            ></Image>
+            <div>{weatherResult?.weather[0].description}</div>
             <div>
-                Temperature: {KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
+                Temperature: <span>{KtoF(weatherResult?.main.temp).toFixed(0)}</span> &#8457;
             </div>
         </div>
     );
