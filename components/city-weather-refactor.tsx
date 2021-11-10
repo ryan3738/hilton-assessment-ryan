@@ -21,6 +21,7 @@ export const CityWeather = ({city}:CityWeatherProps) => {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
             const result = await fetch(url);
             const data = await result.json();
+            console.log('Weather Data',data);
             setWeatherResult(data);
         };
         fetchData({city});
@@ -35,11 +36,12 @@ export const CityWeather = ({city}:CityWeatherProps) => {
         }
     return (
         <div>
-            <h1>{city}</h1>
+            <h1>{weatherResult.name}</h1>
+            <div>{weatherResult?.weather[0].icon}</div>
+            <div>Descripiton: {weatherResult?.weather[0].description}</div>
             <div>
                 Temperature: {KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
             </div>
-            <div>Descripiton: {weatherResult?.weather[0].description}</div>
         </div>
     );
 }
