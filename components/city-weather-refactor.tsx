@@ -12,11 +12,19 @@ interface CityWeatherProps {
 }
 
 interface CityWeatherState {
-    weatherResult: any;
+    main: {
+        temp: number;
+    }
+    weather: [
+        {
+        description: string;
+        icon: string;
+    }]
+    name: string;
 }
 
 export const CityWeather = ({city}:CityWeatherProps) => {
-    const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null)
+    const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null);
 
     useEffect(() => {
         const fetchData = async ({city}: {city:string}) => {
@@ -33,21 +41,29 @@ export const CityWeather = ({city}:CityWeatherProps) => {
     // todo: improve accessibility
         // 1. Ensure that clicking on the label "Weather Search" puts focus into the text-input.
         // 2. Make sure any loading states are correctly announced to a screen reader
-        if (!weatherResult) {
-            return <div>Loading...</div>
-        }
+
     return (
-        <div>
-            <h1>{weatherResult.name}</h1>
+        <div className="shadow-lg bg-offwhite flex flex-col items-center justify-center rounded-xl text-center px-2 py-3 m-7">
+            {!weatherResult ? <div className='w-50'>Loading...</div> : ''}
+            {weatherResult && (
+            <>
+            <h1 className="text-2xl font-bold text-gray-500 uppercase">{weatherResult.name}</h1>
+            <div className="">
             <Image
-                src={`http://openweathermap.org/img/wn/${weatherResult?.weather[0].icon}@2x.png`}
-                width={100}
-                height={100}
+            src={`http://openweathermap.org/img/wn/${weatherResult?.weather[0].icon}@4x.png`}
+            width={100}
+            height={100}
             ></Image>
-            <div>{weatherResult?.weather[0].description}</div>
-            <div>
-                Temperature: <span>{KtoF(weatherResult?.main.temp).toFixed(0)}</span> &#8457;
             </div>
+            <div className="text-xl font-semibold text-gray-400 capitalize">{weatherResult?.weather[0].description}</div>
+            <div className="my-2">
+                <span className="text-l font-semibold text-gray-400 capitalize mr-4 ">
+                Temperature:</span>
+                <span className="text-4xl font-semibold text-gray-800 capitalize">{KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
+                </span>
+            </div>
+            </>
+        )}
         </div>
     );
 }
