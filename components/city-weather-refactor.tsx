@@ -13,25 +13,26 @@ interface CityWeatherState {
     weatherResult: any;
 }
 
-
-
 export const CityWeather = ({city}:CityWeatherProps) => {
     const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null)
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async ({city}: {city:string}) => {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
             const result = await fetch(url);
             const data = await result.json();
             setWeatherResult(data);
         };
-        fetchData();
+        fetchData({city});
     }, [city]);
 
     // todo: match the design from the design.png file
     // todo: improve accessibility
         // 1. Ensure that clicking on the label "Weather Search" puts focus into the text-input.
         // 2. Make sure any loading states are correctly announced to a screen reader
+        if (!weatherResult) {
+            return <div>Loading...</div>
+        }
     return (
         <div>
             <h1>{city}</h1>
