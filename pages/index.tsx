@@ -4,31 +4,31 @@ import { CityWeather } from "../components/city-weather-refactor";
 export default function IndexPage() {
   const [city, setCity] = useState<string | null>(null);
   return (
-    <div className="py-2">
+    <div className="w-screen h-screen bg-gray-200 shadow  flex flex-col items-center justify-start p-6">
       <form
-        className="flex items-center justify-center"
+        className="flex flex-wrap flex-row items-center justify-center m-6"
         onSubmit={(e) => {
           e.preventDefault();
           const formdata = new FormData(e.currentTarget);
           setCity(formdata.get("city").toString());
         }}
       >
-        <span>Weather Search:</span>{" "}
+        <span className="text-xl font-semibold">Weather Search: &nbsp;</span>
+        <div className="flex rounded-lg">
         <input
           data-testid="weather-input"
-          className="ml-2 border px-2 py-1 border-black"
+            className="border border-solid border-primary px-2 py-1 rounded-l-lg h-12 w-48"
           type="text"
           name="city"
         />
-        <button className="ml-2 text-sm border rounded-lg p-2" type="submit">
+        <button className="text-white text-l uppercase font-semibold rounded-r-lg px-3 py-2 bg-primary" type="submit">
           Submit
         </button>
+        </div>
       </form>
 
       {city && (
-        <div className="mt-4">
           <CityWeather city={city} />
-        </div>
       )}
     </div>
   );
