@@ -6,7 +6,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-          'sans': ["Roboto", 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
+          'sans': ["Inter", "Roboto", 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
           },
     extend: {
       colors: {
@@ -20,11 +20,5 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: [
-plugin(function({ addBase, theme }) {
-      addBase({
-        'body': { font: theme('font.sans') },
-      })
-    })
-  ]
+  plugins: []
 };
