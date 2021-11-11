@@ -43,9 +43,9 @@ export default function IndexPage() {
       </form>
 
       {city && (
-          <div title={`Current forecast`} tabIndex={0} role="status" className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
+        <section title={`Current forecast`} tabIndex={0} role="status" className=" w-52 h-60 shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center  m-8">
           <CityWeather  city={city}  />
-        </div>
+        </section>
       )}
 
     </main>

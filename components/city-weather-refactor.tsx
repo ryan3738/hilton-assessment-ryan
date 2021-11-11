@@ -27,12 +27,6 @@ export const CityWeather = ({city}:CityWeatherProps) => {
     const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const resultsRef = useRef();
-
-    const focusResults = () => {
-    // Place focus on weather search results
-    resultsRef.current.focus();
-  };
 
     useEffect(() => {
         const fetchData = async ({city}: {city:string}) => {
@@ -63,9 +57,9 @@ export const CityWeather = ({city}:CityWeatherProps) => {
 
 
     return (
-        <section title={`Current forecast`} ref={resultsRef}>
+        <>
             {loading && <div className='w-full h-auto'>Loading...</div>}
-            {error && <div className='w-full h-auto'>Error: {error}</div>}
+            {error && <div className='w-full h-auto text-red-600'>Error: {error}</div>}
             {weatherResult && !loading && !error && (
             <>
             <h2 className="text-2xl font-bold text-darkGray uppercase">{weatherResult.name}</h2>
@@ -76,15 +70,15 @@ export const CityWeather = ({city}:CityWeatherProps) => {
             height={100}
             ></Image>
             <div className="text-xl font-semibold text-lightGray capitalize" aria-hidden='true'>{weatherResult?.weather[0].description}</div>
-            <div className="flex flex-row my-2">
-                        <h3 className="text-l font-semibold text-lightGray capitalize mr-3 ">
+            <div className="flex flex-row flex-nowrap justify-center items-end my-2">
+                    <h3 className="text-l font-semibold text-lightGray capitalize mr-3">
                 Temperature:</h3>
-                <span className="text-4xl font-semibold text-gray-800 capitalize">{KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
-                </span>
+                    <span className="text-4xl font-semibold text-gray-800 capitalize">{KtoF(weatherResult?.main.temp).toFixed(0)}&#8457;
+                    </span>
             </div>
             </>
         )}
-        </section>
+        </>
     );
 }
 // todo: create better tests for the component
