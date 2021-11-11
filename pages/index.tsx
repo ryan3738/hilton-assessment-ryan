@@ -23,7 +23,7 @@ export default function IndexPage() {
         }}
       >
         <h1>
-          <label htmlFor="city" className="text-xl font-semibold pr-2 py-2">
+          <label htmlFor="city" className="text-xl font-medium pr-2 py-2">
             Weather Search:
           </label>
         </h1>
@@ -32,7 +32,7 @@ export default function IndexPage() {
             id="city"
             data-testid="weather-input"
             title="Enter a city to search for the current weather"
-            className="border border-solid border-primary px-2 py-1 rounded-l-lg h-12 w-48"
+            className="border border-solid text-xl text-gray-700 border-primary px-2 py-1 rounded-l-lg h-12 w-48"
             type="text"
             name="city"
           />

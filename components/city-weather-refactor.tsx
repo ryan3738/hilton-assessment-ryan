@@ -67,7 +67,7 @@ export const CityWeather = ({ city }: CityWeatherProps) => {
             )}
             {weatherResult && !loading && !error && (
                 <>
-                    <h2 className="text-2xl font-bold text-darkGray uppercase">
+                    <h2 className="text-2xl font-extrabold  text-darkGray uppercase">
                         {weatherResult.name}
                     </h2>
                     <Image
@@ -77,13 +77,13 @@ export const CityWeather = ({ city }: CityWeatherProps) => {
                         height={100}
                     />
                     <div
-                        className="text-xl font-semibold text-lightGray capitalize"
+                        className="text-lg font-medium text-lightGray capitalize"
                         aria-hidden="true"
                     >
                         {weatherResult?.weather[0].description}
                     </div>
                     <div className="flex flex-row flex-nowrap justify-center items-end my-2">
-                        <h3 className="text-l font-semibold text-lightGray capitalize mr-3">
+                        <h3 className="text-sm font-medium text-lightGray capitalize mr-3">
                             Temperature:
                         </h3>
                         <span className="font-sans text-4xl font-semibold text-gray-800 capitalize">
