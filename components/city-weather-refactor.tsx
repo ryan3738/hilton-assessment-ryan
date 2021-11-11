@@ -43,11 +43,11 @@ export const CityWeather = ({city}:CityWeatherProps) => {
         // 2. Make sure any loading states are correctly announced to a screen reader
 
     return (
-        <div className="shadow-lg bg-offwhite flex flex-col items-center justify-center rounded-xl text-center px-2 py-3 m-7">
+        <div className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-2 py-3 m-7">
             {!weatherResult ? <div className='w-50'>Loading...</div> : ''}
             {weatherResult && (
             <>
-            <h1 className="text-2xl font-bold text-gray-500 uppercase">{weatherResult.name}</h1>
+            <h1 className="text-2xl font-bold text-darkGray uppercase">{weatherResult.name}</h1>
             <div className="">
             <Image
             src={`http://openweathermap.org/img/wn/${weatherResult?.weather[0].icon}@4x.png`}
@@ -55,9 +55,9 @@ export const CityWeather = ({city}:CityWeatherProps) => {
             height={100}
             ></Image>
             </div>
-            <div className="text-xl font-semibold text-gray-400 capitalize">{weatherResult?.weather[0].description}</div>
+            <div className="text-xl font-semibold text-lightGray capitalize">{weatherResult?.weather[0].description}</div>
             <div className="my-2">
-                <span className="text-l font-semibold text-gray-400 capitalize mr-4 ">
+                        <span className="text-l font-semibold text-lightGray capitalize mr-4 ">
                 Temperature:</span>
                 <span className="text-4xl font-semibold text-gray-800 capitalize">{KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
                 </span>
