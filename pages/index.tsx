@@ -47,7 +47,7 @@ export default function IndexPage() {
 
       {city && (
         <section
-          title="Current forecast"
+          title={`Current forecast for ${city}`}
           tabIndex={0}
           role="status"
           className=" w-52 h-60 shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center  m-8"
