@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-// todo: refactor the city-weather component to use function component & react hooks
 
 // to get api key: https://openweathermap.org/appid
 const API_KEY = 'b233fc3510574b2cec6129d5d30e9ee2';
@@ -27,10 +26,11 @@ function KtoF(tempKevlin: number): number {
     return ((tempKevlin - 273.15) * 9) / 5 + 32;
 }
 
+// todo: refactor the city-weather component to use function component & react hooks
 export const CityWeather = ({ city }: CityWeatherProps) => {
     const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(
         null
-    );
+        );
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -58,7 +58,6 @@ export const CityWeather = ({ city }: CityWeatherProps) => {
 
     // todo: match the design from the design.png file
     // todo: improve accessibility
-
     return (
         <>
             {loading && <div className="w-full h-auto">Loading...</div>}
@@ -67,7 +66,7 @@ export const CityWeather = ({ city }: CityWeatherProps) => {
             )}
             {weatherResult && !loading && !error && (
                 <>
-                    <h2 className="text-2xl font-extrabold  text-darkGray uppercase">
+                    <h2 className="text-2xl font-bold  text-darkGray uppercase">
                         {weatherResult.name}
                     </h2>
                     <Image
