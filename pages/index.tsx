@@ -4,8 +4,7 @@ import Head from 'next/head'
 
 export default function IndexPage() {
   const [city, setCity] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+
 
   return (
     <main className="w-screen h-screen bg-offWhite shadow  flex flex-col items-center justify-start p-6">
@@ -44,7 +43,7 @@ export default function IndexPage() {
 
       {city && (
           <div title={`Current forecast`} tabIndex={0} role="status" className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
-          <CityWeather  city={city} loading={loading} setLoading={setLoading} error={error} setError={setError} />
+          <CityWeather  city={city}  />
         </div>
       )}
 

@@ -9,12 +9,7 @@ const API_KEY = "b233fc3510574b2cec6129d5d30e9ee2";
 
 interface CityWeatherProps {
     city: string;
-    loading: boolean;
-    setLoading: (loading: boolean) => void;
-    error: string | null;
-    setError: (error: string | null) => void;
 }
-
 interface CityWeatherState {
     main: {
         temp: number;
@@ -28,10 +23,10 @@ interface CityWeatherState {
     loading: boolean;
 }
 
-export const CityWeather = ({city, loading, setLoading, error, setError}:CityWeatherProps) => {
+export const CityWeather = ({city}:CityWeatherProps) => {
     const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null);
-    // const [loading, setLoading] = useState<boolean>(true);
-    // const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
     const resultsRef = useRef();
 
     const focusResults = () => {
