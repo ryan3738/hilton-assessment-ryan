@@ -1,27 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { CityWeather } from "../components/city-weather-refactor";
 import Head from 'next/head'
 
 export default function IndexPage() {
   const [city, setCity] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  // const inputRef = useRef();
-  // const resultsRef = useRef();
-
-  // useEffect(() => {
-  //   focusCity();
-  // }, []);
-
-  // const focusCity = () => {
-  //   // Place focus on weather search input box
-  //   inputRef.current.focus();
-  // };
-
-  // const focusResults = () => {
-  //   // Place focus on weather search results
-  //   resultsRef.current.focus();
-  // };
 
   return (
     <main className="w-screen h-screen bg-offWhite shadow  flex flex-col items-center justify-start p-6">
@@ -37,8 +21,6 @@ export default function IndexPage() {
           e.preventDefault();
           const formdata = new FormData(e.currentTarget);
           setCity(formdata.get("city").toString());
-          // city && focusCity();
-          // focusResults();
         }}
       >
         <h1>
@@ -48,7 +30,6 @@ export default function IndexPage() {
         <input
           id="city"
           data-testid="weather-input"
-          // ref={inputRef}
           title="Enter a city to search for the current weather"
           className="border border-solid border-primary px-2 py-1 rounded-l-lg h-12 w-48"
           type="text"
@@ -60,12 +41,13 @@ export default function IndexPage() {
         </div>
       </form>
 
-      {city && (
-        <div tabIndex={0} title={`Current forecast`} className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
 
-          <CityWeather  city={city} />
+      {city && (
+          <div title={`Current forecast`} tabIndex={0} role="status" className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
+          <CityWeather  city={city} loading={loading} setLoading={setLoading} error={error} setError={setError} />
         </div>
       )}
+
     </main>
   );
 }

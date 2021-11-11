@@ -9,6 +9,10 @@ const API_KEY = "b233fc3510574b2cec6129d5d30e9ee2";
 
 interface CityWeatherProps {
     city: string;
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+    error: string | null;
+    setError: (error: string | null) => void;
 }
 
 interface CityWeatherState {
@@ -24,16 +28,22 @@ interface CityWeatherState {
     loading: boolean;
 }
 
-export const CityWeather = ({city}:CityWeatherProps) => {
+export const CityWeather = ({city, loading, setLoading, error, setError}:CityWeatherProps) => {
     const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    // const [loading, setLoading] = useState<boolean>(true);
+    // const [error, setError] = useState<string | null>(null);
+    const resultsRef = useRef();
 
+    const focusResults = () => {
+    // Place focus on weather search results
+    resultsRef.current.focus();
+  };
 
     useEffect(() => {
         const fetchData = async ({city}: {city:string}) => {
             setError(null);
             setLoading(true);
+            focusResults();
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
             const result = await fetch(url);
             const data = await result.json();
@@ -50,10 +60,10 @@ export const CityWeather = ({city}:CityWeatherProps) => {
         // 2. Make sure any loading states are correctly announced to a screen reader
 
     return (
-        <section>
+        <section title={`Current forecast`} ref={resultsRef}>
             {loading && <div className='w-full h-auto'>Loading...</div>}
             {error && <div className='w-full h-auto'>{error}</div>}
-            {weatherResult && (
+            {weatherResult && !loading && !error && (
             <>
             <h2 className="text-2xl font-bold text-darkGray uppercase">{weatherResult.name}</h2>
             <Image
