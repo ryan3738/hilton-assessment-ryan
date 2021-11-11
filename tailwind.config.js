@@ -1,10 +1,13 @@
-const colors = require('tailwindcss/colors')
+const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   mode: "jit",
   purge: ["./**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+          'sans': ["Roboto", 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
+          },
     extend: {
       colors: {
         primary: '#4683c8',
@@ -17,5 +20,11 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: []
+  plugins: [
+plugin(function({ addBase, theme }) {
+      addBase({
+        'body': { font: theme('font.sans') },
+      })
+    })
+  ]
 };
