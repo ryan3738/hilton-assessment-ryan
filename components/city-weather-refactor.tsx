@@ -37,8 +37,6 @@ export const CityWeather = ({ city }: CityWeatherProps) => {
     useEffect(() => {
         const fetchData = async ({ city }: { city: string }) => {
             try {
-                setError(null);
-                setWeatherResult(null);
                 setLoading(true);
                 const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
                 const response = await fetch(url);
@@ -49,11 +47,13 @@ export const CityWeather = ({ city }: CityWeatherProps) => {
                 } else {
                     setError(response.statusText);
                 }
-            } finally {
+            }
+            finally {
                 setLoading(false);
             }
         };
         fetchData({ city });
+        return () => {setError(null); setWeatherResult(null);};
     }, [city]);
 
     // todo: match the design from the design.png file
