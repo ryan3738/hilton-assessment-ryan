@@ -13,7 +13,7 @@ export default function IndexPage() {
           setCity(formdata.get("city").toString());
         }}
       >
-        <span className="text-xl font-semibold">Weather Search: &nbsp;</span>
+        <span className="text-xl font-semibold pr-2">Weather Search:</span>
         <div className="flex rounded-lg">
         <input
           data-testid="weather-input"

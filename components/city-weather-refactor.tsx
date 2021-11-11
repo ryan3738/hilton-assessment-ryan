@@ -43,7 +43,7 @@ export const CityWeather = ({city}:CityWeatherProps) => {
         // 2. Make sure any loading states are correctly announced to a screen reader
 
     return (
-        <div className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-2 py-3 m-7">
+        <div className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
             {!weatherResult ? <div className='w-50'>Loading...</div> : ''}
             {weatherResult && (
             <>
@@ -57,7 +57,7 @@ export const CityWeather = ({city}:CityWeatherProps) => {
             </div>
             <div className="text-xl font-semibold text-lightGray capitalize">{weatherResult?.weather[0].description}</div>
             <div className="my-2">
-                        <span className="text-l font-semibold text-lightGray capitalize mr-4 ">
+                        <span className="text-l font-semibold text-lightGray capitalize mr-3 ">
                 Temperature:</span>
                 <span className="text-4xl font-semibold text-gray-800 capitalize">{KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
                 </span>
