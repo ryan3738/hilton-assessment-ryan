@@ -36,28 +36,36 @@ export const CityWeather = ({city}:CityWeatherProps) => {
 
     useEffect(() => {
         const fetchData = async ({city}: {city:string}) => {
+
+            try{
             setError(null);
+            setWeatherResult(null);
             setLoading(true);
-            focusResults();
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
-            const result = await fetch(url);
-            const data = await result.json();
-            console.log('Weather Data',data);
-            setWeatherResult(data);
-            setLoading(false);
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Weather Data', data);
+                setWeatherResult(data);
+            } else {
+                setError(response.statusText);
+            }
+            } finally {
+                setLoading(false);
+            }
         };
         fetchData({city});
     }, [city]);
 
     // todo: match the design from the design.png file
     // todo: improve accessibility
-        // 1. Ensure that clicking on the label "Weather Search" puts focus into the text-input.
-        // 2. Make sure any loading states are correctly announced to a screen reader
+
+
 
     return (
         <section title={`Current forecast`} ref={resultsRef}>
             {loading && <div className='w-full h-auto'>Loading...</div>}
-            {error && <div className='w-full h-auto'>{error}</div>}
+            {error && <div className='w-full h-auto'>Error: {error}</div>}
             {weatherResult && !loading && !error && (
             <>
             <h2 className="text-2xl font-bold text-darkGray uppercase">{weatherResult.name}</h2>

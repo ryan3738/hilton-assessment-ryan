@@ -5,7 +5,7 @@ import Head from 'next/head'
 export default function IndexPage() {
   const [city, setCity] = useState<string | null>(null);
 
-
+  // 1. Ensure that clicking on the label "Weather Search" puts focus into the text-input.
   return (
     <main className="w-screen h-screen bg-offWhite shadow  flex flex-col items-center justify-start p-6">
       <Head>
@@ -21,7 +21,8 @@ export default function IndexPage() {
           const formdata = new FormData(e.currentTarget);
           setCity(formdata.get("city").toString());
         }}
-      >
+        >
+
         <h1>
         <label  htmlFor="city" className="text-xl font-semibold pr-2 py-2">Weather Search:</label>
         </h1>
@@ -40,7 +41,7 @@ export default function IndexPage() {
         </div>
       </form>
 
-
+      // 2. Make sure any loading states are correctly announced to a screen reader
       {city && (
           <div title={`Current forecast`} tabIndex={0} role="status" className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
           <CityWeather  city={city}  />
