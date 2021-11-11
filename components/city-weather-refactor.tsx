@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from 'next/image'
 
 // todo: refactor the city-weather component to use function component & react hooks
@@ -21,18 +21,25 @@ interface CityWeatherState {
         icon: string;
     }]
     name: string;
+    loading: boolean;
 }
 
 export const CityWeather = ({city}:CityWeatherProps) => {
     const [weatherResult, setWeatherResult] = useState<CityWeatherState | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
 
     useEffect(() => {
         const fetchData = async ({city}: {city:string}) => {
+            setError(null);
+            setLoading(true);
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
             const result = await fetch(url);
             const data = await result.json();
             console.log('Weather Data',data);
             setWeatherResult(data);
+            setLoading(false);
         };
         fetchData({city});
     }, [city]);
@@ -43,24 +50,25 @@ export const CityWeather = ({city}:CityWeatherProps) => {
         // 2. Make sure any loading states are correctly announced to a screen reader
 
     return (
-        <section title={`${city} search results` }className="shadow-lg bg-white flex flex-col items-center justify-center rounded-xl text-center px-3 py-3 m-8">
-            {!weatherResult ? <div className='w-50'>Loading...</div> : ''}
+        <section>
+            {loading && <div className='w-full h-auto'>Loading...</div>}
+            {error && <div className='w-full h-auto'>{error}</div>}
             {weatherResult && (
             <>
-            <h1 className="text-2xl font-bold text-darkGray uppercase">{weatherResult.name}</h1>
+            <h2 className="text-2xl font-bold text-darkGray uppercase">{weatherResult.name}</h2>
             <Image
             src={`http://openweathermap.org/img/wn/${weatherResult?.weather[0].icon}@4x.png`}
             alt={weatherResult?.weather[0].description}
             width={100}
             height={100}
             ></Image>
-            <p className="text-xl font-semibold text-lightGray capitalize">{weatherResult?.weather[0].description}</p>
-            <p className="my-2">
-                        <span className="text-l font-semibold text-lightGray capitalize mr-3 ">
-                Temperature:</span>
+            <div className="text-xl font-semibold text-lightGray capitalize" aria-hidden='true'>{weatherResult?.weather[0].description}</div>
+            <div className="flex flex-row my-2">
+                        <h3 className="text-l font-semibold text-lightGray capitalize mr-3 ">
+                Temperature:</h3>
                 <span className="text-4xl font-semibold text-gray-800 capitalize">{KtoF(weatherResult?.main.temp).toFixed(0)} &#8457;
                 </span>
-            </p>
+            </div>
             </>
         )}
         </section>

@@ -54,4 +54,4 @@ App crashes
 2. Talk about your changes
    - For the refactor and other accompanying tasks, include any other thoughts, assumptions, or known compromises in how you approached the work.
 
-I refactored the component to use react hooks. I used async and await instead of fetch(). I believe it is easier to read and understand. The useState hook is used to keep track of the weather data. The useEffect hook makes sure that the component is only rendered when the city prop changes.
+I refactored the component to use react hooks. I used async and await instead of fetch(). I believe it is easier to read and understand. The useState hook is used to keep track of the weather data. The useEffect hook makes sure that the component is only rendered when the city prop changes. 
