@@ -8,7 +8,7 @@ export default function IndexPage() {
   // 1. Ensure that clicking on the label "Weather Search" puts focus into the text-input.
   // 2. Make sure any loading states are correctly announced to a screen reader
   return (
-    <main className="w-screen h-screen bg-offWhite shadow  flex flex-col items-center justify-start p-6">
+    <main className="w-screen min-h-screen h-full bg-offWhite shadow  flex flex-col items-center justify-start p-6">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Weather App</title>
