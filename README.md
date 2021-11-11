@@ -53,5 +53,12 @@ App crashes
 
 2. Talk about your changes
    - For the refactor and other accompanying tasks, include any other thoughts, assumptions, or known compromises in how you approached the work.
-
-I refactored the component to use react hooks. I used async and await instead of fetch(). I believe it is easier to read and understand. The useState hook is used to keep track of the weather data. The useEffect hook makes sure that the component is only rendered when the city prop changes. 
+     - I refactored the component to use react hooks. The useState hook is used to keep track of the weather data. The useEffect hook makes sure that the component is only rendered when the city prop changes.
+     - I updated the interface for the CityWeatherState to include the data the app is using from the API call. This could be expanded to include all of the possible data and types from the API call.
+     - I added a loading state to the component to show the user the API call is in progress.
+     - In addition, there is error handling for the API call. If the API call fails, the error message is displayed to the user. This will let the user know if there is no result for the city they entered. Better messages could be displayed for the various errors to make it more clrear to the user.
+     - Following the design comp I had to assume a few details like the font, and exact spacing. I loaded the file into a browser and used the dev tools to measure the pixels and match them the best I could. Most of my time implementing the css was spent learning Tailwind CSS which I have never used. I enjoyed using Tailwind once I got the hang of it.
+     - To improve the accesibility I started by running the app through Lighthouse to catch the more obvoious issues. I added the meta data to the head of the html file to make sure a screen reader reads out details of the app.
+     - I used the "for" attribute to link the label to the input which puts focus on the input if the label is clicked.
+     - The section that includes the forecast card is labeled with role="status" which will provide a screen reader with infomration on loading, errors, and the final data that gets returned. I used aria-hidden on the description becuase I used the same description for the alt on the icon and it seemed redundant to have it read the same description twice.
+     - I put tabIndex={0} on the forecast card becuase it allows the user to tab to the results and cycle through the details if they want. I am not sure if this is the best way to do it but it worked for me.
